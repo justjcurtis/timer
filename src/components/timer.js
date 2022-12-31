@@ -13,7 +13,13 @@ const styles = {
         overflowY: 'scroll'
     },
     buttonContainer: {
-        height: '10vh',
+        bottom: '5vh',
+        position: 'absolute',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        left: 0,
+        right: 0,
+        height: '5vh',
         textAlign: 'center'
     },
     bottomButton: {
@@ -29,7 +35,7 @@ const styles = {
         position: 'absolute',
         fontSize: 25,
         right: 25,
-        bottom: 40
+        bottom: '5vh'
     }
 }
 
@@ -63,7 +69,7 @@ const Timer = () => {
         let pos = 8 + (timerIndex.current * k) + ((currentMS.current / t) * k)
         const r = Math.round((t - currentMS.current) / 1000)
         indicatorValue.current = valToStr(r)
-        indicatorRightPos.current = 25 + ((9 - indicatorValue.current.length) * 8)
+        indicatorRightPos.current = 10 + ((9 - indicatorValue.current.length) * 8)
         setIndicatorPosition(isNaN(pos) ? 0 : pos)
     }
 
