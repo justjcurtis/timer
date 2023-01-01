@@ -88,7 +88,7 @@ const Timer = () => {
             currentMS.current = 0
             timerIndex.current = newIndex
             ding()
-        }, 300)
+        }, 25)
     }
 
     const pause = () => {
