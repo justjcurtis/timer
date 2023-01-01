@@ -7,13 +7,21 @@ const styles = {
         marginLeft: '15%'
     },
     textbox: {
-        // '::placeholder': {
-        //     color: '#ccc'
-        // },
         marginBottom: 10,
         textAlign: 'center',
-        // backgroundColor: 'transparent',
-        // color: 'white'
+        backgroundColor: 'transparent',
+        color: 'white',
+        borderColor: 'transparent',
+        boxShadow: 'none',
+        borderBottom: '1px solid #666'
+    },
+    insertButton: {
+        border: 'none',
+        borderRadius: 5,
+        backgroundColor: 'transparent',
+        color: 'white',
+        textAlign: 'center',
+        alignContent: 'center'
     }
 }
 
@@ -98,9 +106,9 @@ const Entry = ({ i, disabled, isSet, addTimer, editTimer, deleteTimer, insertTim
         <div style={styles.container}>
             {
                 isSet ?
-                    <><input ref={inputText} disabled={disabled} onBlur={onBlur} onKeyUp={handleKeyUp} style={styles.textbox} className={`input ${isValid ? '' : 'is-danger'}`} type="text" defaultValue={str} />
-                        <button disabled={disabled} onClick={() => insertTimer(i)}>+</button></> :
-                    <input ref={inputText} disabled={disabled} onBlur={onBlur} onKeyUp={handleKeyUp} style={styles.textbox} className="input" type="text" placeholder="enter time eg. 1m30s or 10s" />
+                    <><input ref={inputText} disabled={disabled} onBlur={onBlur} onKeyUp={handleKeyUp} style={styles.textbox} className={`placeholderWhite input ${isValid ? '' : 'is-danger'}`} type="text" defaultValue={str} />
+                        <button style={styles.insertButton} disabled={disabled} onClick={() => insertTimer(i)}>+</button></> :
+                    <input ref={inputText} disabled={disabled} onBlur={onBlur} onKeyUp={handleKeyUp} style={styles.textbox} className="placeholderWhite input" type="text" placeholder="enter time eg. 1m30s or 10s" />
             }
         </div>
     )

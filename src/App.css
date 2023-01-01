@@ -3,3 +3,11 @@
   width: 100vw;
   background-color: #3f3f77;
 }
+
+.placeholderWhite::placeholder {
+  color:whitesmoke
+}
+
+.is-danger {
+  border-bottom: 1px solid #602f33 !important;
+}
