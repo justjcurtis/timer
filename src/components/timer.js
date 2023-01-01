@@ -1,6 +1,10 @@
 import { useRef, useState } from 'react'
 import { Entry } from './entry'
 const dingPath = require('../sounds/ding.m4a')
+const clearPath = require('../images/clear.png')
+const pausePath = require('../images/pause.png')
+const playPath = require('../images/play.png')
+const stopPath = require('../images/stop.png')
 
 const styles = {
     container: {
@@ -23,7 +27,12 @@ const styles = {
         textAlign: 'center'
     },
     bottomButton: {
-        margin: 5
+        margin: 5,
+        backgroundColor: 'transparent',
+        border: 'none'
+    },
+    buttomImage: {
+        height: 40,
     },
     indicator: {
         position: 'absolute',
@@ -165,9 +174,9 @@ const Timer = () => {
                 <button style={styles.bottomButton} disabled={timers.length < 1} onClick={() => {
                     resetRun()
                     setTimers([])
-                }} className="button">❌</button>
-                <button style={styles.bottomButton} disabled={timers.length < 1 && !isRunning} onClick={toggleRunning} className="button">{isRunning ? '⏸' : '▶️'}</button>
-                <button style={styles.bottomButton} disabled={!isRunning} onClick={resetRun} className="button">⏹</button>
+                }} className="button"><img style={styles.buttomImage} src={clearPath} alt="❌" /></button>
+                <button style={styles.bottomButton} disabled={timers.length < 1 && !isRunning} onClick={toggleRunning} className="button"><img style={styles.buttomImage} src={isRunning ? pausePath : playPath} alt={isRunning ? '⏸' : '▶️'} /></button>
+                <button style={styles.bottomButton} disabled={!isRunning} onClick={resetRun} className="button"><img style={styles.buttomImage} src={stopPath} alt="⏹" /></button>
             </div >
             <div style={{ ...styles.countdownText, right: indicatorRightPos.current }}>{indicatorValue.current}</div>
         </div >
