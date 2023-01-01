@@ -13,7 +13,13 @@ const styles = {
         overflow: 'hidden',
     },
     timerContainer: {
-        height: '90vh',
+        position: 'absolute',
+        top: 0,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        left: 0,
+        right: 0,
+        height: '66vh',
         overflowY: 'scroll'
     },
     buttonContainer: {
@@ -23,7 +29,7 @@ const styles = {
         marginRight: 'auto',
         left: 0,
         right: 0,
-        height: '5vh',
+        height: '12vh',
         textAlign: 'center'
     },
     bottomButton: {
@@ -41,10 +47,14 @@ const styles = {
         backgroundColor: '#602f33',
     },
     countdownText: {
+        textAlign: 'center',
         position: 'absolute',
-        fontSize: 25,
-        right: 25,
-        bottom: '5vh'
+        fontSize: 30,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        left: 0,
+        right: 0,
+        bottom: '4vh'
     }
 }
 
@@ -58,7 +68,7 @@ const Timer = () => {
     const intervalHandle = useRef(null)
     const [indicatorPosition, setIndicatorPosition] = useState(-2)
     const indicatorValue = useRef('')
-    const indicatorRightPos = useRef(0)
+    const timeDivRef = useRef(null)
 
     const valToStr = r => {
         let str = ''
@@ -75,10 +85,10 @@ const Timer = () => {
 
     const calculateIndicatorDetails = t => {
         const k = 84
-        let pos = 8 + (timerIndex.current * k) + ((currentMS.current / t) * k)
-        const r = Math.round((t - currentMS.current) / 1000)
+        let pos = 8 + (timerIndex.current * k) + ((currentMS.current / t) * k) - timeDivRef.current.scrollTop
+        if (pos > timeDivRef.current.clientHeight + 2) pos = -2
+        const r = (Math.round((t - currentMS.current) / 1000))
         indicatorValue.current = valToStr(r)
-        indicatorRightPos.current = 10 + ((9 - indicatorValue.current.length) * 8)
         setIndicatorPosition(isNaN(pos) ? 0 : pos)
     }
 
@@ -160,7 +170,7 @@ const Timer = () => {
     return (
         <div style={styles.container}>
             <div style={{ ...styles.indicator, top: indicatorPosition }} />
-            <div style={styles.timerContainer}>
+            <div ref={timeDivRef} style={styles.timerContainer}>
                 {timers.map((t, i) => {
                     return (
                         <div key={i}>
@@ -178,7 +188,7 @@ const Timer = () => {
                 <button style={styles.bottomButton} disabled={timers.length < 1 && !isRunning} onClick={toggleRunning} className="button"><img style={styles.buttomImage} src={isRunning ? pausePath : playPath} alt={isRunning ? '⏸' : '▶️'} /></button>
                 <button style={styles.bottomButton} disabled={!isRunning} onClick={resetRun} className="button"><img style={styles.buttomImage} src={stopPath} alt="⏹" /></button>
             </div >
-            <div style={{ ...styles.countdownText, right: indicatorRightPos.current }}>{indicatorValue.current}</div>
+            <div style={styles.countdownText}>{indicatorValue.current}</div>
         </div >
     )
 }
