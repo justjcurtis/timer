@@ -186,7 +186,7 @@ const Timer = () => {
                     setTimers([])
                 }} className="button"><img style={styles.buttomImage} src={clearPath} alt="❌" /></button>
                 <button style={styles.bottomButton} disabled={timers.length < 1 && !isRunning} onClick={toggleRunning} className="button"><img style={styles.buttomImage} src={isRunning ? pausePath : playPath} alt={isRunning ? '⏸' : '▶️'} /></button>
-                <button style={styles.bottomButton} disabled={!isRunning} onClick={resetRun} className="button"><img style={styles.buttomImage} src={stopPath} alt="⏹" /></button>
+                <button style={styles.bottomButton} disabled={!isRunning && currentMS.current === 0 && timerIndex.current === 0} onClick={resetRun} className="button"><img style={styles.buttomImage} src={stopPath} alt="⏹" /></button>
             </div >
             <div style={styles.countdownText}>{indicatorValue.current}</div>
         </div >
